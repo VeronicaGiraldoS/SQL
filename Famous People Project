@@ -1,0 +1,89 @@
+-- Creating tables to use joins 
+
+CREATE TABLE Famous_People (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Profession TEXT, nationality TEXT, Partner_id INTEGER);
+
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Taylor Swift","Singer, Songwriter, Director", "American");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Emma Stone", "actress", "American");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Henry Cavill","actor","English");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Millie Bobby Brown","Actress,producer,Entrepreneur","English");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Chris Evans","actor","American");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Ana de Armas","Actress", "Cuban");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Zendaya","actress, singer, model","American");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Sofia Vergara","actress","Colombian");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Sofia Carson", "actress,embassador","American");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Nicholas Galitzine","actor", "English");
+INSERT INTO  Famous_People (name, profession,nationality,partner_id) VALUES ("Shawn Mendes", "Singer,songwriter","Canadian",13);
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Rihanna","Singer, Entreprenaur","Barbarian");
+INSERT INTO  Famous_People (name, profession,nationality,partner_id) VALUES ("Camila Cabello","Singer,songwriter","Mexican-Cuban",11);
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Salma Hayek","Actress","Mexican");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Lupita Nyong'o","actress","Mexican-Kenyan");
+INSERT INTO  Famous_People (name, profession,nationality) VALUES ("Eiza Gonzalez", "Actress","Mexican");
+
+CREATE TABLE partners (Id INTEGER PRIMARY KEY AUTOINCREMENT, Status TEXT, name TEXT,year TEXT);
+
+INSERT INTO partners (Status, name,year) VALUES ("Single",Null, NUll);
+INSERT INTO partners (Status, name,year) VALUES ("married","Dave MacKary","2020-Present");
+INSERT INTO partners (Status, name,year) VALUES ("In a relationship","Natalie Viscuso",Null);
+INSERT INTO partners (Status, name,year) VALUES ("Engaged","Jake Bon Jovi","2023");
+INSERT INTO partners (Status, name,year) VALUES ("In a relationship","ALba Baptista","2021-Present");
+INSERT INTO partners (Status, name,year) VALUES ("Single",Null, NUll);
+INSERT INTO partners (Status, name,year) VALUES ("In a relationship","Tom Holland","2021-present");
+INSERT INTO partners (Status, name,year) VALUES ("Married","Joe Manganiello","2015_present");
+INSERT INTO partners (Status, name,year) VALUES ("Single",Null,Null);
+INSERT INTO partners (Status, name,year) VALUES ("Single",Null,Null);
+INSERT INTO partners (Status, name,year) VALUES ("In a relationship","Camila Cabello","2023");
+INSERT INTO partners (Status, name,year) VALUES ("In a relationship", "ASAP Rocky","2020-present");
+INSERT INTO partners (Status, name,year) VALUES ("In a relationship","Shawn Mendes","2023");
+INSERT INTO partners (Status, name,year) VALUES ("Married","François-Henri Pinault","2009");
+INSERT INTO partners (Status, name,year) VALUES ("Single",Null,Null);
+INSERT INTO partners (Status, name,year) VALUES ("Single",Null,Null);
+
+
+CREATE TABLE projects_Singers (Id INTEGER, Latest_Relevant_project TEXT, year INTEGER);
+
+INSERT INTO projects_Singers (id,Latest_Relevant_project, year) VALUES (1,"Eras Tour", 2023);
+INSERT INTO projects_Singers (id,Latest_Relevant_project, year) VALUES (11,"Wonder", 2020);
+INSERT INTO projects_Singers (id,Latest_Relevant_project, year) VALUES (12,"Superbowl 2023",2023);
+INSERT INTO projects_Singers (id,Latest_Relevant_project, year) VALUES (13,"Familia Album",2022);
+
+CREATE TABLE projects_Actors (id INTEGER,Latest_Relevant_project TEXT, year TEXT);
+
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (2,"Cruella",2021);
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (3,"The Witcher",2023);
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (4,"Enola Holmes",2022);
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (5," Ghosted",2023);
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (6," blonde",2022);
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (7,"Dune",2023);
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (8,"Modern Family", 2020);
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (9,"Purple Hearts",2022);
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (10,"Purple hearts",2022);
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (14,"Magic Mike:last dance",2023);
+INSERT INTO projects_Actors (id,Latest_Relevant_project, year) VALUES (15,"Black panter", 2022);
+INSERT INTO projects_Actors (id, Latest_Relevant_project, year) VALUES (16,"Ambulance", 2022);
+
+--Using joins to match the wanted values 
+
+SELECT Famous_People.Name, Famous_people.nationality, p.Status, p.name
+FROM Famous_People
+     JOIN partners p
+     ON famous_people.id = p.id;
+
+-- Using a self join in a table  to match the famous couple
+
+SELECT Famous_People.name, partner.name 
+FROM   Famous_People
+      JOIN Famous_People partner
+       ON Famous_People.partner_id = partner.id;
+
+-- Using multiple joins to join multiple table values
+
+     
+SELECT Famous_People.Name, Famous_People.Profession, pa.Latest_Relevant_project,ps.Latest_Relevant_project
+FROM Famous_People
+     JOIN projects_Actors pa
+     ON Famous_People.id = pa.id
+    JOIN projects_Singers ps
+     ON Famous_People.id = ps.id;
+
+    
+ 
